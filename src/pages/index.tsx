@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
+import { NextPage } from "next";
 
-const Index = () => {
+const Index: NextPage = () => {
   const [count, increment] = useState(0);
 
   const handleClick = useCallback(() => increment(count + 1), [count]);
