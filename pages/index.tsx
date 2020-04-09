@@ -1,25 +1,65 @@
 import React, { useState, useCallback } from "react";
+import gql from "graphql-tag";
 import { NextPage } from "next";
-import { useTranslation } from '../i18next';
+import { useTranslation } from "../i18next";
+import { useQuery } from "@apollo/react-hooks";
+
+const QUERY = gql`
+  {
+    activities(input: { offset: 10 }) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        totalCount
+      }
+      nodes {
+        id
+        name
+        performers {
+          name
+        }
+      }
+    }
+  }
+`;
 
 const Index: NextPage = () => {
   const { t } = useTranslation();
-  const [count, setCount] = useState(0);
+  const query = useQuery(QUERY);
 
-  const handleIncrement = useCallback(() => setCount(count + 1), [count]);
-  const handleDecrement = useCallback(() => setCount(count - 1), [count]);
+  console.log(query);
+  const { loading, data, error } = query;
+
+  if (loading) {
+    return <div>{t('index.loading', "Loading...")}</div>
+  }
+
+  if (error) {
+    return <div>{t("index.error", "An unexpected error occurred")}</div>;
+  }
 
   return (
     <div>
-      <h3>{t('index.title', 'Your count: {{count}}', { count })}</h3>
-      <button onClick={handleIncrement}>{t('index.add', 'Add')}</button>
-      <button onClick={handleDecrement}>{t('index.subtract', 'Subtract')}</button>
+      <ul>
+        {data.activities.nodes.map((node: any) => (
+          <li key={node.id}>
+            <h4>{node.name}</h4>
+            <ul>
+              {node.performers.map((performer: any) => (
+                <li>
+                  {performer.name}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 Index.getInitialProps = async () => ({
-  namespacesRequired: ['common'],
+  namespacesRequired: ["common"],
 });
 
 export default Index;
