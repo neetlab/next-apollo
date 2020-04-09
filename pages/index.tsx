@@ -18,4 +18,8 @@ const Index: NextPage = () => {
   );
 };
 
+Index.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default Index;

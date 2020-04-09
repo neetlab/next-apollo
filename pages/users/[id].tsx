@@ -22,4 +22,8 @@ const User: NextPage = () => {
   );
 };
 
+User.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default User;
