@@ -1,8 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
+import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { NextPage } from "next";
 import { useTranslation } from "../i18next";
-import { useQuery } from "@apollo/react-hooks";
+import { withApollo } from '../utils/with-apollo';
 
 const QUERY = gql`
   {
@@ -25,10 +26,7 @@ const QUERY = gql`
 
 const Index: NextPage = () => {
   const { t } = useTranslation();
-  const query = useQuery(QUERY);
-
-  console.log(query);
-  const { loading, data, error } = query;
+  const { loading, data, error } = useQuery(QUERY);
 
   if (loading) {
     return <div>{t('index.loading', "Loading...")}</div>
@@ -62,4 +60,4 @@ Index.getInitialProps = async () => ({
   namespacesRequired: ["common"],
 });
 
-export default Index;
+export default withApollo(Index);
