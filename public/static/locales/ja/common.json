@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "合計: {{count}}",
+    "click": "追加"
+  },
+  "user": {
+    "title": "利用者 {{id}}",
+    "back": "ホームに戻る"
+  }
+}

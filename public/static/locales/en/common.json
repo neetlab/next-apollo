@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "Your count: {{count}}",
+    "click": "Click"
+  },
+  "user": {
+    "title": "User {{id}}",
+    "back": "Back to Home"
+  }
+}
