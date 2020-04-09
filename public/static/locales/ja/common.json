@@ -1,7 +1,8 @@
 {
   "index": {
     "title": "合計: {{count}}",
-    "click": "追加"
+    "add": "足す",
+    "subtract": "引く"
   },
   "user": {
     "title": "利用者 {{id}}",

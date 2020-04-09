@@ -4,14 +4,16 @@ import { useTranslation } from '../i18next';
 
 const Index: NextPage = () => {
   const { t } = useTranslation();
-  const [count, increment] = useState(0);
+  const [count, setCount] = useState(0);
 
-  const handleClick = useCallback(() => increment(count + 1), [count]);
+  const handleIncrement = useCallback(() => setCount(count + 1), [count]);
+  const handleDecrement = useCallback(() => setCount(count - 1), [count]);
 
   return (
     <div>
       <h3>{t('index.title', 'Your count: {{count}}', { count })}</h3>
-      <button onClick={handleClick}>{t('index.click', 'Click')}</button>
+      <button onClick={handleIncrement}>{t('index.add', 'Add')}</button>
+      <button onClick={handleDecrement}>{t('index.subtract', 'Subtract')}</button>
     </div>
   );
 };

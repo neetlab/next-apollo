@@ -1,7 +1,8 @@
 {
   "index": {
     "title": "Your count: {{count}}",
-    "click": "Click"
+    "add": "Add",
+    "subtract": "Subtract"
   },
   "user": {
     "title": "User {{id}}",
